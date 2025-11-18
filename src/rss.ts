@@ -1,6 +1,6 @@
 import { XMLParser } from 'fast-xml-parser';
 
-type RSSFeed = {
+export type RSSFeed = {
   channel: {
     title: string;
     link: string;
@@ -9,7 +9,7 @@ type RSSFeed = {
   };
 };
 
-type RSSItem = {
+export type RSSItem = {
   title: string;
   link: string;
   description: string;
@@ -23,14 +23,19 @@ export async function fetchFeed(feedURL: string) {
       'User-Agent': 'gator',
     },
   });
+  if (!response.ok) {
+    throw new Error(`HTTP Error: ${response.status}`);
+  }
+
   const text = await response.text();
   const parser = new XMLParser();
   const data = parser.parse(text);
 
-  const { channel } = data?.['rss'];
-  if (!channel) {
-    throw new Error('RSS Feed parsing error - no channel');
+  const rss = data?.rss;
+  if (!rss?.channel) {
+    throw new Error('RSS Feed parsing error - no RSS or channel found');
   }
+  const { channel } = rss;
   const { title, link, description, item } = channel;
   if (!title || !link || !description) {
     throw new Error('RSS Feed parsing error - no channel properties');
