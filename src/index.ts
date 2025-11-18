@@ -1,3 +1,4 @@
+import { handlerAgg } from './commands/agg';
 import {
   CommandsRegistry,
   registerCommand,
@@ -14,6 +15,7 @@ async function main() {
   registerCommand(commands, 'register', handlerRegister);
   registerCommand(commands, 'reset', handlerReset);
   registerCommand(commands, 'users', handlerUsers);
+  registerCommand(commands, 'agg', handlerAgg);
 
   const rawArgs = process.argv.slice(2);
   if (rawArgs.length === 0) {
