@@ -5,11 +5,15 @@ import {
 } from './commands/command';
 import { handlerLogin } from './commands/login';
 import { handlerRegister } from './commands/register';
+import { handlerReset } from './commands/reset';
+import { handlerUsers } from './commands/users';
 
 async function main() {
   const commands: CommandsRegistry = {};
   registerCommand(commands, 'login', handlerLogin);
   registerCommand(commands, 'register', handlerRegister);
+  registerCommand(commands, 'reset', handlerReset);
+  registerCommand(commands, 'users', handlerUsers);
 
   const rawArgs = process.argv.slice(2);
   if (rawArgs.length === 0) {
