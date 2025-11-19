@@ -1,5 +1,5 @@
 import { db } from '..';
-import { users } from '../schema';
+import { users, feeds, feedFollows } from '../schema';
 import { eq } from 'drizzle-orm';
 
 export async function createUser(name: string) {
@@ -12,7 +12,14 @@ export async function findUser(name: string) {
   return result;
 }
 
+export async function findUserById(id: string) {
+  const [result] = await db.select().from(users).where(eq(users.id, id));
+  return result;
+}
+
 export async function reset() {
+  await db.delete(feedFollows);
+  await db.delete(feeds);
   await db.delete(users);
 }
 

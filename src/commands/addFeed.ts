@@ -1,7 +1,6 @@
 import { readConfig } from 'src/config';
-import { createFeed } from 'src/lib/db/queries/feeds';
+import { createFeed, createFeedFollow } from 'src/lib/db/queries/feeds';
 import { findUser } from 'src/lib/db/queries/users';
-import { printFeed } from 'src/lib/utils/printFeed';
 
 export async function handlerAddFeed(cmdName: string, ...args: string[]) {
   if (args.length < 2) {
@@ -12,9 +11,9 @@ export async function handlerAddFeed(cmdName: string, ...args: string[]) {
   const userName = readConfig().currentUserName;
   const user = await findUser(userName);
 
-  const createdFeed = await createFeed(user.id, feedName, feedLink);
+  const createdFeed = await createFeed(feedName, feedLink);
 
-  if (createdFeed) {
-    printFeed(createdFeed, user);
-  }
+  const feedFollow = await createFeedFollow(user.id, createdFeed.id);
+
+  console.log(`${feedFollow.feedName} - ${feedFollow.userName}`);
 }

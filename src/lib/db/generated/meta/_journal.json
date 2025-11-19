@@ -15,6 +15,27 @@
       "when": 1763496019886,
       "tag": "0001_simple_human_fly",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1763581913169,
+      "tag": "0002_aberrant_nomad",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1763584497349,
+      "tag": "0003_curious_liz_osborn",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1763585253431,
+      "tag": "0004_skinny_paibok",
+      "breakpoints": true
     }
   ]
 }
