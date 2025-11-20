@@ -1,15 +1,15 @@
-import { readConfig } from 'src/config';
 import { createFeed, createFeedFollow } from 'src/lib/db/queries/feeds';
-import { findUser } from 'src/lib/db/queries/users';
+import { User } from 'src/lib/db/schema';
 
-export async function handlerAddFeed(cmdName: string, ...args: string[]) {
+export async function handlerAddFeed(
+  cmdName: string,
+  user: User,
+  ...args: string[]
+) {
   if (args.length < 2) {
     throw new Error('You must pass a name and a link to an RSS Feed');
   }
   const [feedName, feedLink] = args;
-
-  const userName = readConfig().currentUserName;
-  const user = await findUser(userName);
 
   const createdFeed = await createFeed(feedName, feedLink);
 

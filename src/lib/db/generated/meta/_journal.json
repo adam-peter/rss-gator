@@ -36,6 +36,13 @@
       "when": 1763585253431,
       "tag": "0004_skinny_paibok",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1763670096414,
+      "tag": "0005_loose_harpoon",
+      "breakpoints": true
     }
   ]
 }

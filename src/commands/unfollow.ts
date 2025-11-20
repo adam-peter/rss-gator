@@ -1,7 +1,7 @@
-import { createFeedFollow, getFeedByUrl } from 'src/lib/db/queries/feeds';
+import { getFeedByUrl, unfollowFeed } from 'src/lib/db/queries/feeds';
 import { User } from 'src/lib/db/schema';
 
-export async function handlerFollow(
+export async function handlerUnfollow(
   cmdName: string,
   user: User,
   ...args: string[]
@@ -17,6 +17,6 @@ export async function handlerFollow(
     throw new Error(`No feed found with URL: ${url}`);
   }
 
-  const feedFollow = await createFeedFollow(user.id, feed.id);
-  console.log(`${feedFollow.feedName} - ${feedFollow.userName}`);
+  const deletedFeedFollow = await unfollowFeed(user.id, feed.id);
+  console.log(deletedFeedFollow);
 }

@@ -27,6 +27,7 @@ export const feeds = pgTable('feeds', {
     .$onUpdate(() => new Date()),
   name: text('name').notNull(),
   url: text('url').notNull().unique(),
+  lastFetchedAt: timestamp('last_fetched_at'),
 });
 
 export const feedsRelations = relations(feeds, ({ many }) => ({
