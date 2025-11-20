@@ -1,4 +1,5 @@
 import { getNextFeedToFetch, markFeedFetched } from 'src/lib/db/queries/feeds';
+import { createPost } from 'src/lib/db/queries/posts';
 import { parseDuration } from 'src/lib/utils/parseDuration';
 import { fetchFeed } from 'src/rss';
 
@@ -17,7 +18,15 @@ async function scrapeFeeds() {
   const feed = await fetchFeed(nextFeed.url);
   console.log(`\nFetching feed '${feed.channel.title}':`);
   for (const item of feed.channel.item) {
-    console.log(item.title);
+    const createdPost = await createPost({
+      title: item.title,
+      description: item.description,
+      publishedAt: item.pubDate ? new Date(item.pubDate) : null,
+      url: item.link,
+      feedId: nextFeed.id,
+    });
+
+    console.log(createdPost.title);
   }
 }
 

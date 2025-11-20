@@ -43,6 +43,13 @@
       "when": 1763670096414,
       "tag": "0005_loose_harpoon",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1763672849683,
+      "tag": "0006_dizzy_firebrand",
+      "breakpoints": true
     }
   ]
 }

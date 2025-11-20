@@ -1,5 +1,6 @@
 import { handlerAddFeed } from './commands/addFeed';
 import { handlerAgg } from './commands/agg';
+import { handlerBrowse } from './commands/browse';
 import {
   CommandsRegistry,
   registerCommand,
@@ -21,12 +22,13 @@ async function main() {
   registerCommand(commands, 'register', handlerRegister);
   registerCommand(commands, 'reset', handlerReset);
   registerCommand(commands, 'users', handlerUsers);
-  registerCommand(commands, 'agg', handlerAgg);
   registerCommand(commands, 'addfeed', middlewareLoggedIn(handlerAddFeed));
   registerCommand(commands, 'feeds', handlerFeeds);
   registerCommand(commands, 'follow', middlewareLoggedIn(handlerFollow));
   registerCommand(commands, 'following', middlewareLoggedIn(handlerFollowing));
   registerCommand(commands, 'unfollow', middlewareLoggedIn(handlerUnfollow));
+  registerCommand(commands, 'agg', handlerAgg);
+  registerCommand(commands, 'browse', middlewareLoggedIn(handlerBrowse));
 
   const rawArgs = process.argv.slice(2);
   if (rawArgs.length === 0) {
